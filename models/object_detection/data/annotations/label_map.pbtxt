@@ -5,7 +5,7 @@ item {
 
 item {
     id: 2
-    name: '50 speed limit'
+    name: '50 speed sign'
 }
 
 item {
