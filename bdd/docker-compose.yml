@@ -1,0 +1,34 @@
+version: '3.7'
+
+services:
+  database:
+    image: mysql:latest
+    container_name: database
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD=root
+      - MYSQL_USER=deeppicar
+      - MYSQL_PASSWORD=deeppicar
+      - MYSQL_DATABASE=deepicar
+    networks:
+      - database_net
+    ports:
+      - 3306:3306
+    security_opt:
+      - seccomp:unconfined
+    volumes:
+      - database_data:/var/lib/mysql
+      - ./BDD/init-db:/docker-entrypoint-initdb.d
+    command: --default-authentication-plugin=mysql_native_password
+  adminer:
+    image: dehy/adminer
+    container_name: adminer
+    networks:
+      - database_net
+    ports:
+      - 8080:80
+networks:
+  database_net:
+    driver: bridge
+    name: database_net
+volumes:
+  database_data:

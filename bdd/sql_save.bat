@@ -1,0 +1,1 @@
+mysqldump.exe --single-transaction --user=deeppicar --password=deeppicar  --host=localhost --port=3306 --result-file="C:\Users\utilisateur\Desktop\projet_chef_oeuvre\DeepPiCar\bdd\BDD\backup.sql" --default-character-set=utf8 --single-transaction=TRUE --databases "deepicar" --no-tablespaces;
