@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  myservice:
+    build:
+      context: C:/Users/utilisateur/Desktop/object_detection/docker-edgetpu-compiler
+      dockerfile: Dockerfile
+    image: result/latest
+    volumes:
+      - ./transform_model:/home/edgetpu
+    command: tail -f /dev/null
