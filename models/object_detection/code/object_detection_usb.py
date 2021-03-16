@@ -21,8 +21,10 @@ def main():
     args = parser.parse_args()
     
     #args.model = 'test_data/mobilenet_ssd_v2_coco_quant_postprocess.tflite'
-    args.model = 'data/model_result/road_signs_quantized.tflite'
-    args.label = 'data/model_result/road_sign_labels.txt'
+    #args.model = 'data/model_result/road_signs_quantized.tflite'
+    #args.label = 'data/model_result/road_sign_labels.txt'
+    args.model = 'data/model_result/road_signs_quantized_edgetpu_14-03-2021.tflite'
+    args.label = 'data/model_result/road_sign_labels_14_03_2021.txt'
         
     with open(args.label, 'r') as f:
         pairs = (l.strip().split(maxsplit=1) for l in f.readlines())
@@ -46,7 +48,7 @@ def main():
     annotate_text = ""
     annotate_text_time = time.time()
     time_to_show_prediction = 1.0 # ms
-    min_confidence = 0.20
+    min_confidence = 0.30
     
     # initial classification engine
     engine = edgetpu.detection.engine.DetectionEngine(args.model)
@@ -68,6 +70,7 @@ def main():
                 input = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)  # convert to RGB color space
                 img_pil = Image.fromarray(input)
                 #input = cv2.resize(input, (width,height))
+                img = np.array(img_pil)
                 start_tf_ms = time.time()
                 results = engine.DetectWithImage(img_pil, threshold=min_confidence, keep_aspect_ratio=True,
                                    relative_coord=False, top_k=5)
