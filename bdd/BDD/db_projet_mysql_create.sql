@@ -1,11 +1,12 @@
 CREATE TABLE `Object_Detection_Images` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`image_path` varchar(255) NOT NULL,
-	`pedestrian` INT NOT NULL,
+	`person` INT NOT NULL,
 	`red_light` INT NOT NULL,
 	`green_light` INT NOT NULL,
-	`stop_sign` INT NOT NULL,
-	`speed_sign` INT NOT NULL,
+	`30_speed_sign` INT NOT NULL,
+        `50_speed_sign` INT NOT NULL,
+        `stop_sign` INT NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
@@ -36,7 +37,6 @@ CREATE TABLE `Lane_Navigation_Images` (
 CREATE TABLE `Object_Detection_Models` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`model` varchar(255) NOT NULL,
-	`precision` FLOAT NOT NULL,
 	`loss` FLOAT NOT NULL,
 	PRIMARY KEY (`id`)
 );
