@@ -5,8 +5,8 @@ CREATE TABLE `Object_Detection_Images` (
 	`red_light` INT NOT NULL,
 	`green_light` INT NOT NULL,
 	`30_speed_sign` INT NOT NULL,
-        `50_speed_sign` INT NOT NULL,
-        `stop_sign` INT NOT NULL,
+	`50_speed_sign` INT NOT NULL,
+	`stop_sign` INT NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
@@ -48,9 +48,17 @@ CREATE TABLE `Ride` (
 	PRIMARY KEY (`id`)
 );
 
+CREATE TABLE `Speed` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`time` TIMESTAMP NOT NULL,
+	`speed` INT NOT NULL,
+	`ride_id` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
 ALTER TABLE `Lane_Navigation_Images` ADD CONSTRAINT `Lane_Navigation_Images_fk0` FOREIGN KEY (`ride_id`) REFERENCES `Ride`(`id`);
 
 ALTER TABLE `Ride` ADD CONSTRAINT `Ride_fk0` FOREIGN KEY (`car_id`) REFERENCES `Cars`(`id`);
 
-ALTER TABLE `Lane_Navigation_Images` ADD CONSTRAINT `image_path` UNIQUE (`image_path`);
+ALTER TABLE `Speed` ADD CONSTRAINT `Speed_fk0` FOREIGN KEY (`ride_id`) REFERENCES `Ride`(`id`);
 
