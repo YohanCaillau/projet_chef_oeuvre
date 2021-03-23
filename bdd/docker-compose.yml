@@ -4,11 +4,8 @@ services:
   database:
     image: mysql:latest
     container_name: database
-    environment:
-      - MYSQL_RANDOM_ROOT_PASSWORD=root
-      - MYSQL_USER=deeppicar
-      - MYSQL_PASSWORD=deeppicar
-      - MYSQL_DATABASE=deepicar
+    env_file:
+      - .env
     networks:
       - database_net
     ports:
@@ -26,6 +23,18 @@ services:
       - database_net
     ports:
       - 8080:80
+  mysql-cron-backup:
+    container_name: db-backup
+    image: fradelg/mysql-cron-backup
+    depends_on:
+      - database
+    volumes:
+      - ./BDD/backup:/backup
+    env_file:
+      - .env
+    restart: unless-stopped
+    networks:
+      - database_net
 networks:
   database_net:
     driver: bridge
