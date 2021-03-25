@@ -41,7 +41,7 @@ CREATE TABLE `Object_Detection_Models` (
 	PRIMARY KEY (`id`)
 );
 
-CREATE TABLE `Ride` (
+CREATE TABLE `Rides` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`ground` varchar(255) NOT NULL,
 	`car_id` INT NOT NULL,
@@ -60,5 +60,5 @@ ALTER TABLE `Lane_Navigation_Images` ADD CONSTRAINT `Lane_Navigation_Images_fk0`
 
 ALTER TABLE `Ride` ADD CONSTRAINT `Ride_fk0` FOREIGN KEY (`car_id`) REFERENCES `Cars`(`id`);
 
-ALTER TABLE `Speed` ADD CONSTRAINT `Speed_fk0` FOREIGN KEY (`ride_id`) REFERENCES `Ride`(`id`);
+ALTER TABLE `Speed` ADD CONSTRAINT `Speed_fk0` FOREIGN KEY (`ride_id`) REFERENCES `Rides`(`id`);
 
