@@ -10,7 +10,8 @@ from dotenv import load_dotenv
 from sqlalchemy import create_engine
 
 # Get the autentification informations from env file
-path='C:/Users/utilisateur/Desktop/Voiture_Autonome/bdd/.env'
+# path='C:/Users/utilisateur/Desktop/Voiture_Autonome/bdd/.env'
+path='C:/Users/utilisateur/OneDrive/Bureau/Voiture_Autonome/bdd/.env'
 
 load_dotenv(dotenv_path=path)
 user=os.getenv("MYSQL_USER")
@@ -32,7 +33,7 @@ df_angle = pd.read_sql("SELECT steering_angle FROM Lane_Navigation_Images", cnxn
 df_lane_nav = pd.read_sql("SELECT * FROM Lane_Navigation_Models", cnxn)
 df_object_detection = pd.read_sql("SELECT `person`, `red_light`, `green_light`, `30_speed_sign`, `50_speed_sign`, `stop_sign` FROM Object_Detection_Images", cnxn)
 df_join_car = pd.read_sql("SELECT `steering_angle` FROM Lane_Navigation_Images INNER JOIN Cars ON Lane_Navigation_Images.ride_id = Cars.id WHERE Cars.id=1", cnxn)
-df = pd.read_csv("C:/Users/utilisateur/Desktop/Voiture_Autonome/temps_frame.csv")
+df = pd.read_csv("C:/Users/utilisateur/OneDrive/Bureau/Voiture_Autonome/temps_frame.csv")
 df_trajet = pd.concat([df_join_car, df], axis=1)
 df_speed = pd.read_sql("SELECT * FROM Speed", cnxn)
  
